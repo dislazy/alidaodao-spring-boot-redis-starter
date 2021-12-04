@@ -1,0 +1,24 @@
+name:  Publish to Maven Central
+
+on:
+  release:
+    types: [created]
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Install Java and Maven
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Release Maven package
+        uses: samuelmeuli/action-maven-publish@v1
+        with:
+          gpg_private_key: ${{ secrets.PGP_PRI_KEY }}
+          server_id: ${{ secrets.SERVER_ID }}
+          nexus_username: ${{ secrets.SERVER_USERNAME }}
+          nexus_password: ${{ secrets.SERVER_PASSWORD }}
