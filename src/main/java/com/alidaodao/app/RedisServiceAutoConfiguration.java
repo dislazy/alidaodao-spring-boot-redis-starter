@@ -10,9 +10,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,31 +20,46 @@ import java.util.stream.Collectors;
  * redis client
  */
 @Configuration
-@EnableConfigurationProperties(RedisProperties.class)
+@EnableConfigurationProperties(JedisProperties.class)
 @ConditionalOnClass(RedisClient.class)
-@ConditionalOnProperty(prefix="spring.redis",value="enabled",matchIfMissing=true)
+@ConditionalOnProperty(prefix="spring.jedis",value="enabled",matchIfMissing=true)
 public class RedisServiceAutoConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisServiceAutoConfiguration.class);
 
     @Autowired
-    private RedisProperties redisProperties;
+    private JedisProperties redisProperties;
 
     @Bean(value = "redisClient")
     @ConditionalOnMissingBean(RedisClient.class)
     public RedisClient redisClient() {
         if (!redisProperties.isEnable()) {
-            LOGGER.warn("[REDIS-CLIENT] redis enable is false");
+            LOGGER.error("[REDIS-CLIENT] redis enable is false");
             return null;
         }
         if (Objects.isNull(redisProperties.getIndexes()) || redisProperties.getIndexes().length <= 0) {
-            LOGGER.warn("[REDIS-CLIENT] redis indexes is empty");
+            LOGGER.error("[REDIS-CLIENT] redis indexes is empty");
             return null;
         }
         RedisConfig redisConfig = new RedisConfig();
-        redisConfig.setHost(redisProperties.getHost());
-        redisConfig.setPort(redisProperties.getPort());
-        redisConfig.setPassword(redisProperties.getPassword());
+        redisConfig.setRedisHost(redisProperties.getRedisHost());
+        redisConfig.setRedisPort(redisProperties.getRedisPort());
+        redisConfig.setRedisPwd(redisProperties.getRedisPwd());
+        redisConfig.setMaxTotal(redisProperties.getMaxTotal());
+        redisConfig.setMaxIdle(redisProperties.getMaxIdle());
+        redisConfig.setMinIdle(redisProperties.getMinIdle());
+        redisConfig.setBlockWhenExhausted(redisProperties.isBlockWhenExhausted());
+        redisConfig.setMaxWaitMillis(redisProperties.getMaxWaitMillis());
+        redisConfig.setTimeout(redisProperties.getTimeout());
+        redisConfig.setTestOnBorrow(redisProperties.isTestOnBorrow());
+        redisConfig.setTestOnReturn(redisProperties.isTestOnReturn());
+        redisConfig.setTestOnCreate(redisProperties.isTestOnCreate());
+        redisConfig.setTestWhileIdle(redisProperties.isTestWhileIdle());
+        redisConfig.setJmxEnabled(redisProperties.isJmxEnabled());
+        redisConfig.setNumTestsPerEvictionRun(redisProperties.getNumTestsPerEvictionRun());
+        redisConfig.setTimeBetweenEvictionRuns(redisProperties.getTimeBetweenEvictionRuns());
+        redisConfig.setMinEvictableIdleTimeMillis(redisProperties.getMinEvictableIdleTimeMillis());
+
         //此处为需要创建的redis db实例
         Set<Integer> redisDbIndex = Arrays.stream(redisProperties.getIndexes()).collect(Collectors.toSet());
         RedisClient redisClient = new RedisClient(redisConfig, redisDbIndex);
