@@ -7,7 +7,7 @@ alidaodao-app-redis是一款基于JedisPool的动态多redisDB获取实例，执
 
 ## 引入spring-boot-redis-starter方式（自动配置）
 
-### 引入依赖
+### 引入依赖(连接池要自行引入)
 ```
 <dependency>
   <groupId>com.alidaodao.app</groupId>
