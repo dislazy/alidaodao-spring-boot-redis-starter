@@ -1,6 +1,7 @@
 package com.alidaodao.app.utils;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
@@ -43,5 +44,25 @@ public class DateTimeUtils {
     public static Date localDateToUtilDate(LocalDate localDate) {
         return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
     }
+    /**
+     * 转换LocalDateTime为Date
+     *
+     * @param localDateTime 日期
+     * @return 响应结果
+     */
+    public static Date localDateTimeToUtilDate(LocalDateTime localDateTime) {
+        return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * 转换Date为LocalDateTime
+     *
+     * @param utilDate date
+     * @return 响应结果
+     */
+    public static LocalDateTime utilDateToLocalDateTime(Date utilDate) {
+        return LocalDateTime.ofInstant(utilDate.toInstant(), ZoneId.systemDefault());
+    }
+
 
 }
