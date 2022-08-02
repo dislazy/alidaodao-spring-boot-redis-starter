@@ -3,6 +3,9 @@ package com.alidaodao.app.utils;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
 import java.util.Date;
 
 /**
@@ -62,6 +65,29 @@ public class DateTimeUtils {
      */
     public static LocalDateTime utilDateToLocalDateTime(Date utilDate) {
         return LocalDateTime.ofInstant(utilDate.toInstant(), ZoneId.systemDefault());
+    }
+
+
+    /**
+     * 计算两个日期中的小时数
+     *
+     * @param temporal1Inclusive 开始时间
+     * @param temporal2Exclusive 结束时间
+     * @return 响应结果
+     */
+    public static long hoursBetween(Temporal temporal1Inclusive, Temporal temporal2Exclusive) {
+        return ChronoUnit.HOURS.between(temporal1Inclusive, temporal2Exclusive);
+    }
+
+    /**
+     * 格式化日期
+     *
+     * @param date
+     * @param parse
+     * @return
+     */
+    public static String parse(LocalDate date,String parse){
+        return date.format(DateTimeFormatter.ofPattern(parse));
     }
 
 
