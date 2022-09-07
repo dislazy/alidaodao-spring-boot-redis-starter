@@ -37,11 +37,9 @@ public class RedisServiceAutoConfiguration {
     @ConditionalOnMissingBean(RedisClient.class)
     public RedisClient redisClient() {
         if (!redisProperties.isEnable()) {
-            LOGGER.error("[REDIS-CLIENT] redis enable is false");
             return null;
         }
         if (Objects.isNull(redisProperties.getIndexes()) || redisProperties.getIndexes().length <= 0) {
-            LOGGER.error("[REDIS-CLIENT] redis indexes is empty");
             return null;
         }
         RedisConfig redisConfig = new RedisConfig();
