@@ -1,6 +1,7 @@
 package com.alidaodao.app;
 
 import com.alidaodao.app.config.RedisConfig;
+import com.alidaodao.app.utils.DateTimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
@@ -64,7 +67,7 @@ public class RedisServiceAutoConfiguration {
         Set<Integer> redisDbIndex = Arrays.stream(redisProperties.getIndexes()).collect(Collectors.toSet());
         RedisClient redisClient = new RedisClient(redisConfig, redisDbIndex);
         redisClient.setDefaultIndex(redisProperties.getDefaultIndex());
-        LOGGER.info("[REDIS-CLIENT]redis client init success,you can use indexes: {}", redisDbIndex);
+        LOGGER.info("[REDIS-CLIENT]redis client init success,you can use indexes: {},and current time: {}", redisDbIndex, DateTimeUtils.localDateTimeToUtilDate(LocalDateTime.now()));
         return redisClient;
     }
 }
