@@ -91,4 +91,37 @@ public class DateTimeUtils {
     }
 
 
+    /**
+     * 计算两个日期中的分钟数
+     *
+     * @param temporal1Inclusive 开始时间
+     * @param temporal2Exclusive 结束时间
+     * @return 响应结果
+     */
+    public static long minutesBetween(Temporal temporal1Inclusive, Temporal temporal2Exclusive) {
+        return ChronoUnit.MINUTES.between(temporal1Inclusive, temporal2Exclusive);
+    }
+
+    /**
+     * 计算两个日期中的秒数
+     *
+     * @param temporal1Inclusive 开始时间
+     * @param temporal2Exclusive 结束时间
+     * @return 响应结果
+     */
+    public static long secondsBetween(Temporal temporal1Inclusive, Temporal temporal2Exclusive) {
+        return ChronoUnit.SECONDS.between(temporal1Inclusive, temporal2Exclusive);
+    }
+
+    /**
+     * 日期时间格式化
+     *
+     * @param dateTime 日期时间
+     * @param format   格式
+     * @return 响应结果
+     */
+    public static String dateTimeFormat(LocalDateTime dateTime, String format) {
+        return dateTime.format(DateTimeFormatter.ofPattern(format));
+    }
+
 }
