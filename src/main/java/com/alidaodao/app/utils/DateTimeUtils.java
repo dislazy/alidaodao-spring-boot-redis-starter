@@ -2,6 +2,7 @@ package com.alidaodao.app.utils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -124,4 +125,53 @@ public class DateTimeUtils {
         return dateTime.format(DateTimeFormatter.ofPattern(format));
     }
 
+
+
+    /**
+     * 日期格式化
+     *
+     * @param date   日期
+     * @param format 格式
+     * @return 响应结果
+     */
+    public static String dateFormat(LocalDate date, String format) {
+        return date.format(DateTimeFormatter.ofPattern(format));
+    }
+
+    /**
+     * 时间格式化
+     *
+     * @param time   时间
+     * @param format 格式
+     * @return 响应结果
+     */
+    public static String timeFormat(LocalTime time, String format) {
+        return time.format(DateTimeFormatter.ofPattern(format));
+    }
+
+    /**
+     * 转化String为日期时间
+     *
+     * @param text   日期内容
+     * @param format 格式
+     * @return 响应结果
+     */
+    public static LocalDateTime parseToLocalDateTime(String text, String format) {
+        return LocalDateTime.parse(text, DateTimeFormatter.ofPattern(format));
+    }
+
+    /**
+     * 转化String为日期
+     *
+     * @param text   日期内容
+     * @param format 格式
+     * @return 响应结果
+     */
+    public static LocalDate parseToLocalDate(String text, String format) {
+        return LocalDate.parse(text, DateTimeFormatter.ofPattern(format));
+    }
+
+    public static void main(String[] args) {
+        System.out.println(parse(LocalDate.now(),DATE_BASE_FORMAT));
+    }
 }
