@@ -1,5 +1,9 @@
 package com.alidaodao.app.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * @author jack
  * @since 2022-09-07
@@ -111,5 +115,35 @@ public class StringUtils {
 
     public static String subFileName(String fileName){
         return fileName.substring(0,fileName.lastIndexOf("/"));
+    }
+
+    /**
+     * 转Integer
+     *
+     * @param obj
+     * @return
+     */
+    public static Object objToInteger(Object obj) {
+        if (obj != null){
+            if (obj instanceof ArrayList){
+                List<Integer> list = new ArrayList<>();
+                ((List<String>) obj).forEach(d->{
+                    list.add(Integer.valueOf(d));
+                });
+                return list;
+            }else if(obj instanceof String){
+                return Integer.valueOf(obj.toString());
+            }
+        }
+        return null;
+    }
+
+    /**
+     * list conver to string
+     * @param list
+     * @return
+     */
+    public static String convert(List<String> list){
+        return list.stream().collect(Collectors.joining(""));
     }
 }

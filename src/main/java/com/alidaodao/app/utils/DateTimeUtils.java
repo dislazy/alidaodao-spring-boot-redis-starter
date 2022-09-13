@@ -172,6 +172,14 @@ public class DateTimeUtils {
     }
 
     public static void main(String[] args) {
+        //parse
         System.out.println(parse(LocalDate.now(),DATE_BASE_FORMAT));
+
+        //date
+        System.out.println(dateFormat(LocalDate.now(),DATE_BASE_FORMAT));
+
+        //utils
+        System.out.println(localDateToUtilDate(LocalDate.now()));
+
     }
 }
