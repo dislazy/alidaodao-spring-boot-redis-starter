@@ -198,6 +198,10 @@ public class SecondPwdUtils {
     }
 
 
+    public static void main(String[] args) {
+        System.out.println(generateTOTP("M74F QSV7 P32Y DKXH AKCM LPCN X6C5 E376"));
+    }
+
 
 
 }
