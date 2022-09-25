@@ -1,7 +1,11 @@
 package com.alidaodao.app.utils;
 
+import com.alidaodao.app.pojo.BaseVO;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -176,4 +180,17 @@ public class StringUtils {
         }
         return new Integer[]{0, 0};
     }
+
+
+    public static List<BaseVO> matchMap(Map<Integer, String> map) {
+        if (Objects.isNull(map) || map.isEmpty()) {
+            return null;
+        }
+        List<BaseVO> result = new ArrayList<>();
+        for (Map.Entry<Integer, String> single : map.entrySet()) {
+            result.add(new BaseVO(single.getKey(), single.getValue()));
+        }
+        return result;
+    }
+
 }
