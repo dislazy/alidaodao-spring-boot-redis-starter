@@ -146,4 +146,34 @@ public class StringUtils {
     public static String convert(List<String> list){
         return list.stream().collect(Collectors.joining(""));
     }
+
+
+
+    /**
+     *
+     * @param categoryId  完整的CID
+     * @return [0]  [1]
+     */
+    public static Integer[] pickCategory(String categoryId) {
+        if (org.apache.commons.lang3.StringUtils.isBlank(categoryId)) {
+            throw new RuntimeException();
+        }
+        String[] c = categoryId.split("-");
+        if (c.length <= 2) {
+            throw new RuntimeException("category id length not two");
+        }
+        //1级品类
+        if ("C".equals(c[1]) && "C".equals(c[2])) {
+            return new Integer[]{1, Integer.parseInt(c[0])};
+        }
+        //二级品类
+        if (!"C".equals(c[1]) && "C".equals(c[2])) {
+            return new Integer[]{2, Integer.parseInt(c[1])};
+        }
+        //三级品类
+        if (!"C".equals(c[1]) && !"C".equals(c[2])) {
+            return new Integer[]{3, Integer.parseInt(c[2])};
+        }
+        return new Integer[]{0, 0};
+    }
 }
