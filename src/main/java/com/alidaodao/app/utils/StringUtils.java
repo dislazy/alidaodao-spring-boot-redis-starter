@@ -197,5 +197,7 @@ public class StringUtils {
             map.put(i,i+"");
         }
         System.out.println(matchMap(map));
+
+        System.out.println(Arrays.toString(pickCategory("3-193418")));
     }
 }
