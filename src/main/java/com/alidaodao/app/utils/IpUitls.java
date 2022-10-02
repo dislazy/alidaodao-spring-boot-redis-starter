@@ -79,4 +79,9 @@ public class IpUitls {
         }
         return localip;
     }
+
+    public static void main(String[] args) {
+        String localIp = getLocalIp();
+        System.out.println(isIpv4(localIp));
+    }
 }

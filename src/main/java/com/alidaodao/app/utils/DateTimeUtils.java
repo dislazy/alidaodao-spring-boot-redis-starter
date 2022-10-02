@@ -181,5 +181,9 @@ public class DateTimeUtils {
         //utils
         System.out.println(localDateToUtilDate(LocalDate.now()));
 
+
+        //config
+        System.out.println(parseToLocalDate("2022-10-02",DATE_DEFAULT_FORMAT));
+
     }
 }
