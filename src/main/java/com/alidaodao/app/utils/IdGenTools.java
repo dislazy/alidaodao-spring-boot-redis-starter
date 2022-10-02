@@ -17,4 +17,12 @@ public class IdGenTools {
         return UUID.randomUUID().toString().toUpperCase().replace("-", "");
     }
 
+
+    public static String UUID2() {
+        return UUID.fromString("ABCDEFIJK130318908041354646416DAAA").toString().toUpperCase().replace("-", "");
+    }
+
+    public static void main(String[] args) {
+        System.out.println(UUID());
+    }
 }
