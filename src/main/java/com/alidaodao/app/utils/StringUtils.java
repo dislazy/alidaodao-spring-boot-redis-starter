@@ -2,10 +2,7 @@ package com.alidaodao.app.utils;
 
 import com.alidaodao.app.pojo.BaseVO;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -193,4 +190,12 @@ public class StringUtils {
         return result;
     }
 
+
+    public static void main(String[] args) {
+        Map<Integer,String> map = new HashMap<>();
+        for (int i = 0; i < 10; i++) {
+            map.put(i,i+"");
+        }
+        System.out.println(matchMap(map));
+    }
 }
