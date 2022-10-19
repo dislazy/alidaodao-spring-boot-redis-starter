@@ -7,7 +7,10 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author jack
@@ -170,6 +173,33 @@ public class DateTimeUtils {
     public static LocalDate parseToLocalDate(String text, String format) {
         return LocalDate.parse(text, DateTimeFormatter.ofPattern(format));
     }
+
+    /**
+     * 获取两个日期之间的所有天数
+     *
+     * @param start 开始时间
+     * @param end   结束时间
+     * @return 响应结果
+     */
+    public static List<String> getDayRegions(String start, String end) {
+        List<String> times = new ArrayList<String>();
+        try {
+            LocalDate startDate = LocalDate.parse(start);
+            LocalDate endDate = LocalDate.parse(end);
+            long distance = ChronoUnit.DAYS.between(startDate, endDate);
+            if (distance < 1L) {
+                times.add(startDate.toString());
+                return times;
+            }
+            Stream.iterate(startDate, d -> d.plusDays(1L)).limit(distance + 1L).forEach(f -> times.add(f.toString()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return times;
+    }
+
+
+
 
     public static void main(String[] args) {
         //parse
