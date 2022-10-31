@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * @author bosong
+ * @author jack
  * @since 2022-09-25
  */
 public class BaseVO implements Serializable {

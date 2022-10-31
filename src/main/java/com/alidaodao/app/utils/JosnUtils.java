@@ -1,5 +1,8 @@
 package com.alidaodao.app.utils;
 
+import com.alidaodao.app.exception.BadRequestException;
+import com.alidaodao.app.exception.ResponseCodeEnum;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -27,7 +30,7 @@ public class JosnUtils {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new BadRequestException(ResponseCodeEnum.FAILED);
         }
         return json;
     }
