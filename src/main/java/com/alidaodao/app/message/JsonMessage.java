@@ -3,6 +3,7 @@ package com.alidaodao.app.message;
 import com.alidaodao.app.exception.ResponseCodeEnum;
 
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * @author jack
@@ -23,6 +24,8 @@ public class JsonMessage<T> implements Serializable {
      */
     private T data;
 
+    private Map<String,Object> meta;
+
 
     public JsonMessage() {
 
@@ -31,6 +34,13 @@ public class JsonMessage<T> implements Serializable {
     public JsonMessage(ResponseCodeEnum resultCodeEnum) {
         this.resCode = resultCodeEnum.getCode();
         this.resMsg = resultCodeEnum.getEnName();
+    }
+
+    public JsonMessage(String resMsg, String resCode, T data, Map<String, Object> meta) {
+        this.resMsg = resMsg;
+        this.resCode = resCode;
+        this.data = data;
+        this.meta = meta;
     }
 
     public JsonMessage(T obj, ResponseCodeEnum resultCodeEnum) {

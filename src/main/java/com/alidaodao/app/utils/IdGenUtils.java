@@ -1,7 +1,5 @@
 package com.alidaodao.app.utils;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import java.util.Random;
 import java.util.UUID;
 
@@ -9,7 +7,7 @@ import java.util.UUID;
  * @author jack
  * @since 2022-10-02
  */
-public class IdGenTools {
+public class IdGenUtils {
 
     /**
      * 生成UUID
