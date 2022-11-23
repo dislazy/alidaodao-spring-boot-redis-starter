@@ -37,9 +37,7 @@ public class JosnUtils {
     @SuppressWarnings("unchecked")
 
     public static Method getSetMethod(Class objectClass, String fieldName) {
-
         try {
-
             Class[] parameterTypes = new Class[1];
             Field field = objectClass.getDeclaredField(fieldName);
             parameterTypes[0] = field.getType();
@@ -47,8 +45,7 @@ public class JosnUtils {
             sb.append("set");
             sb.append(fieldName.substring(0, 1).toUpperCase());
             sb.append(fieldName.substring(1));
-            Method method = objectClass.getMethod(sb.toString(), parameterTypes);
-            return method;
+            return objectClass.getMethod(sb.toString(), parameterTypes);
         } catch (Exception e) {
             e.printStackTrace();
         }

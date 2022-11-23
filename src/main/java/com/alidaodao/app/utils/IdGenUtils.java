@@ -19,9 +19,6 @@ public class IdGenUtils {
     }
 
 
-    public static String UUID2() {
-        return UUID.fromString("ABCDEFIJK130318908041354646416DAAA").toString().toUpperCase().replace("-", "");
-    }
 
     public static String UUID3(){
         return UUID.randomUUID().toString().toUpperCase();
@@ -29,8 +26,7 @@ public class IdGenUtils {
 
 
     public static String UUID4(){
-        Random r = new Random(1000L);
-        return String.valueOf(r.nextInt());
+        return UUID.randomUUID().toString().toUpperCase().replace("-", "");
     }
 
     public static void main(String[] args) {
