@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
  * redis client
  */
 @Configuration
-@ConfigurationProperties(prefix = "spring.jedis")
+@ConfigurationProperties(prefix = Constants.PROP_SUFFIX)
 public class JedisProperties {
     /**
      * need open

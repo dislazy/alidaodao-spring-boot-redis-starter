@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableConfigurationProperties(JedisProperties.class)
 @ConditionalOnClass(RedisClient.class)
-@ConditionalOnProperty(prefix="spring.jedis",value="enabled",matchIfMissing=true)
+@ConditionalOnProperty(prefix = Constants.PROP_SUFFIX, value = "enabled", matchIfMissing = true)
 public class RedisServiceAutoConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisServiceAutoConfiguration.class);
