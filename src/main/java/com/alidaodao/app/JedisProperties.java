@@ -82,30 +82,6 @@ public class JedisProperties {
      * 向资源池归还连接时是否做连接有效性检测（ping）。检测到无效连接将会被移除。	业务量很大时候建议设置为false，减少一次ping的开销。
      */
     private boolean testOnReturn = false;
-    /**
-     * 默认false，create的时候检测是有有效，如果无效则从连接池中移除，并尝试获取继续获取
-     */
-    private boolean testOnCreate = false;
-    /**
-     * 是否在空闲资源监测时通过ping命令监测连接有效性，无效连接将被销毁。	建议开启
-     */
-    private boolean testWhileIdle = false;
-    /**
-     * 是否开启JMX监控	建议开启，请注意应用本身也需要开启。
-     */
-    private boolean jmxEnabled = true;
-    /**
-     * 空闲资源的检测周期（单位为毫秒）	建议设置，周期自行选择，可考虑为30000 即30S。
-     */
-    private Long timeBetweenEvictionRuns = 30000L;
-    /**
-     * 资源池中资源的最小空闲时间（单位为毫秒），达到此值后空闲资源将被移除。	可根据自身业务决定，一般默认值即可，也可考虑为60000。
-     */
-    private Long minEvictableIdleTimeMillis = 60000L;
-    /**
-     * 做空闲资源检测时，每次检测资源的个数。	可根据自身应用连接数进行微调，如果设置为 -1，就是对所有连接做空闲监测。
-     */
-    private int numTestsPerEvictionRun;
 
     /**
      * need init redis index db,example: 1,2,3,4,5
@@ -202,54 +178,6 @@ public class JedisProperties {
 
     public void setTestOnReturn(boolean testOnReturn) {
         this.testOnReturn = testOnReturn;
-    }
-
-    public boolean isTestOnCreate() {
-        return testOnCreate;
-    }
-
-    public void setTestOnCreate(boolean testOnCreate) {
-        this.testOnCreate = testOnCreate;
-    }
-
-    public boolean isTestWhileIdle() {
-        return testWhileIdle;
-    }
-
-    public void setTestWhileIdle(boolean testWhileIdle) {
-        this.testWhileIdle = testWhileIdle;
-    }
-
-    public boolean isJmxEnabled() {
-        return jmxEnabled;
-    }
-
-    public void setJmxEnabled(boolean jmxEnabled) {
-        this.jmxEnabled = jmxEnabled;
-    }
-
-    public Long getTimeBetweenEvictionRuns() {
-        return timeBetweenEvictionRuns;
-    }
-
-    public void setTimeBetweenEvictionRuns(Long timeBetweenEvictionRuns) {
-        this.timeBetweenEvictionRuns = timeBetweenEvictionRuns;
-    }
-
-    public Long getMinEvictableIdleTimeMillis() {
-        return minEvictableIdleTimeMillis;
-    }
-
-    public void setMinEvictableIdleTimeMillis(Long minEvictableIdleTimeMillis) {
-        this.minEvictableIdleTimeMillis = minEvictableIdleTimeMillis;
-    }
-
-    public int getNumTestsPerEvictionRun() {
-        return numTestsPerEvictionRun;
-    }
-
-    public void setNumTestsPerEvictionRun(int numTestsPerEvictionRun) {
-        this.numTestsPerEvictionRun = numTestsPerEvictionRun;
     }
 
     public Integer[] getIndexes() {

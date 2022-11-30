@@ -54,12 +54,6 @@ public class RedisServiceAutoConfiguration {
         redisConfig.setTimeout(redisProperties.getTimeout());
         redisConfig.setTestOnBorrow(redisProperties.isTestOnBorrow());
         redisConfig.setTestOnReturn(redisProperties.isTestOnReturn());
-        redisConfig.setTestOnCreate(redisProperties.isTestOnCreate());
-        redisConfig.setTestWhileIdle(redisProperties.isTestWhileIdle());
-        redisConfig.setJmxEnabled(redisProperties.isJmxEnabled());
-        redisConfig.setNumTestsPerEvictionRun(redisProperties.getNumTestsPerEvictionRun());
-        redisConfig.setTimeBetweenEvictionRuns(redisProperties.getTimeBetweenEvictionRuns());
-        redisConfig.setMinEvictableIdleTimeMillis(redisProperties.getMinEvictableIdleTimeMillis());
 
         //此处为需要创建的redis db实例
         Set<Integer> redisDbIndex = Arrays.stream(redisProperties.getIndexes()).collect(Collectors.toSet());
