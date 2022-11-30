@@ -1,5 +1,6 @@
 package com.alidaodao.app;
 
+import com.alidaodao.app.constants.NormalConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * redis client
  */
 @Configuration
-@ConfigurationProperties(prefix = Constants.PROP_SUFFIX)
+@ConfigurationProperties(prefix = NormalConstants.PROP_SUFFIX)
 public class JedisProperties {
     /**
      * need open

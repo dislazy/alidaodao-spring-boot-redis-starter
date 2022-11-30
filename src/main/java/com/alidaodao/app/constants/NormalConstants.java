@@ -88,4 +88,6 @@ public class NormalConstants implements Serializable {
     public static final Integer TEN_THOUSAND = 10000;
     public static final String TEN_THOUSAND_STR = "10000";
 
+    public static final String PROP_SUFFIX="jedis.redis";
+
 }
