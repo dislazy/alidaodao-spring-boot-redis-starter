@@ -11,14 +11,10 @@ import java.util.regex.Pattern;
  * @author jack
  * @since 2022-10-02
  */
-public class IpUitls {
-
-
+public class IpUtils {
     private static final String UNKNOWN = "unknown";
     private static final String LOCALHOST = "127.0.0.1";
     private static final String SEPARATOR = ",";
-
-
 
     /**
      * 是否是ipv4

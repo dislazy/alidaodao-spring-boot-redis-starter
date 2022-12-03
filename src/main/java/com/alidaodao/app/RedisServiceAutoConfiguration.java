@@ -1,6 +1,7 @@
 package com.alidaodao.app;
 
 import com.alidaodao.app.config.RedisConfig;
+import com.alidaodao.app.constants.NormalConstants;
 import com.alidaodao.app.utils.DateTimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 @Configuration
 @EnableConfigurationProperties(JedisProperties.class)
 @ConditionalOnClass(RedisClient.class)
-@ConditionalOnProperty(prefix = Constants.PROP_SUFFIX, value = "enabled", matchIfMissing = true)
+@ConditionalOnProperty(prefix = NormalConstants.PROP_SUFFIX, value = "enabled", matchIfMissing = true)
 public class RedisServiceAutoConfiguration {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RedisServiceAutoConfiguration.class);
