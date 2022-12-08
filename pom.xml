@@ -7,7 +7,7 @@
 
     <groupId>com.alidaodao.app</groupId>
     <artifactId>spring-boot-redis-starter</artifactId>
-    <version>3.0.3</version>
+    <version>3.0.4</version>
 
     <name>spring-boot-redis-starter</name>
     <description>alidaodao-spring-boot-redis-starter</description>

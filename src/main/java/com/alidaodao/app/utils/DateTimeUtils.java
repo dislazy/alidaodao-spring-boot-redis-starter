@@ -1,12 +1,12 @@
 package com.alidaodao.app.utils;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import org.apache.commons.lang3.StringUtils;
+
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -198,7 +198,160 @@ public class DateTimeUtils {
         return times;
     }
 
+    /**
+     * 获取日期中的周一
+     *
+     * @param date 日期
+     * @return 响应结果
+     */
+    public static String getCurrWeekMonday(String date) {
+        if (org.apache.commons.lang3.StringUtils.isBlank((CharSequence) date)) {
+            return null;
+        }
+        try {
+            LocalDate beginDateTime = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate monday = beginDateTime.with(TemporalAdjusters.previous(DayOfWeek.SUNDAY)).plusDays(1L);
+            return monday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
+    /**
+     * 获取日期中的周日
+     *
+     * @param date 日期
+     * @return 响应结果
+     */
+    public static String getCurrWeekSunDay(String date) {
+        if (StringUtils.isBlank((CharSequence) date)) {
+            return null;
+        }
+        try {
+            LocalDate beginDateTime = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            LocalDate monday = beginDateTime.with(TemporalAdjusters.next(DayOfWeek.MONDAY)).minusDays(1L);
+            return monday.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 字符串日期转换为时间戳
+     * @param text
+     * @return
+     */
+    public static long stringToMillisecond(String text) {
+        long milli = 0;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATETIME_MINUTE_FORMAT);
+            LocalDateTime localDateTime1 = LocalDateTime.parse(text, formatter);
+            milli = LocalDateTime.from(localDateTime1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+        } catch (Exception e) {
+            return 0;
+        }
+        return milli;
+    }
+
+
+    /**
+     * 日期时间转化为时间戳
+     *
+     * @param datetime 日期时间
+     * @return 响应结果
+     */
+    public static long localDateTimeToMillisecond(LocalDateTime datetime) {
+        return datetime.toInstant(ZoneOffset.of("+8")).toEpochMilli();
+    }
+
+    /**
+     * 日期转化为时间戳
+     *
+     * @param date 日期
+     * @return 响应结果
+     */
+    public static long localDateToMillisecond(LocalDate date) {
+        return date.atStartOfDay(ZoneOffset.ofHours(8)).toInstant().toEpochMilli();
+    }
+
+    /**
+     * 时间戳转化为日期时间
+     *
+     * @param timestamp 时间戳
+     * @return 响应结果
+     */
+    public static LocalDateTime millisecondToLocalDateTime(Long timestamp) {
+        return Instant.ofEpochMilli(timestamp).atZone(ZoneOffset.ofHours(8)).toLocalDateTime();
+    }
+
+    /**
+     * 时间戳转化为日期
+     *
+     * @param timestamp 时间戳
+     * @return 响应结果
+     */
+    public static LocalDate millisecondToLocalDate(Long timestamp) {
+        return Instant.ofEpochMilli(timestamp).atZone(ZoneOffset.ofHours(8)).toLocalDate();
+    }
+
+
+    /**
+     * 根据给定parrern从字符串解析出Date
+     *
+     * @param pattern 格式
+     * @param text    日期字符串
+     * @return 日期
+     */
+    public static Date parse(String pattern, String text) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        LocalDateTime dest;
+        // 仅判断结尾的dd 一定隐含了部分特殊pattern解析不能的错误
+        // 权且先这样处理 有待改进
+        String dateEndWith = "dd";
+        if (pattern.trim().endsWith(dateEndWith)) {
+            dest = LocalDate.parse(text, formatter).atStartOfDay();
+        } else {
+            dest = LocalDateTime.parse(text, formatter);
+        }
+
+        return Date.from(dest.atZone(ZONE_ID).toInstant());
+    }
+
+    /**
+     * 从字符串解析出Date
+     *
+     * @param text
+     * @return
+     */
+    public static Date parseDate(String text) {
+        return parse(DATE_DEFAULT_FORMAT, text);
+    }
+
+    /**
+     * 从字符串解析出Date
+     *
+     * @param text
+     * @return
+     */
+    public static Date parseDateTime(String text) {
+        return parse(DATETIME_DEFAULT_FORMAT, text);
+    }
+
+    /**
+     * 根据给定parrern从Date解析出字符串
+     *
+     * @param pattern 格式
+     * @param date    日期
+     * @return 日期字符串
+     */
+    public static String format(String pattern, Date date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        LocalDateTime dest = LocalDateTime.ofInstant(date.toInstant(), ZONE_ID);
+
+        return formatter.format(dest);
+    }
 
 
     public static void main(String[] args) {
