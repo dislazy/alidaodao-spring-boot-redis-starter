@@ -18,7 +18,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <spring-boot.version>2.7.5</spring-boot.version>
+        <spring-boot.version>2.7.12</spring-boot.version>
         <redis-client-version>2.0.8</redis-client-version>
     </properties>
 
